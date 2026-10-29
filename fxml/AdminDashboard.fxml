@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="AdminDashboardController"
+            styleClass="dashboard-root"
+            prefWidth="1200" prefHeight="760">
+
+    <top>
+        <HBox styleClass="top-nav top-nav-admin" alignment="CENTER_LEFT" spacing="16">
+            
+            <Button text="🔄" onAction="#handleRefresh" styleClass="icon-btn"/>
+            <Label text="🏨 7amada Hotel" styleClass="nav-brand"/>
+            <Label text="— Admin Panel" styleClass="nav-role"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="adminNameLabel" styleClass="nav-username"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="logout-btn"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane styleClass="main-tabs" tabClosingPolicy="UNAVAILABLE">
+
+            <!-- ROOMS -->
+            <Tab text="🛏  Rooms">
+                <VBox spacing="14" styleClass="tab-body">
+                    
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Room #" styleClass="field-label"/>
+                        <TextField fx:id="addRoomNumField" promptText="e.g. 105" prefWidth="90" styleClass="input-field"/>
+                        <Label text="Type" styleClass="field-label"/>
+                        <ComboBox fx:id="addRoomTypeCombo" prefWidth="120" styleClass="combo-field"/>
+                        <Button text="+ Add Room" onAction="#handleAddRoom" styleClass="primary-btn"/>
+                        <Button text="✕ Remove Selected" onAction="#handleRemoveRoom" styleClass="danger-btn"/>
+                        <Label fx:id="roomStatusLabel" styleClass="status-label"/>
+                    </HBox>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Add Amenity to Room:" styleClass="field-label"/>
+                        <ComboBox fx:id="roomAmenityCombo" prefWidth="150" styleClass="combo-field"/>
+                        <Button text="+ Add Amenity" onAction="#handleAddAmenityToRoom" styleClass="secondary-btn"/>
+                        <Button text="- Remove" onAction="#handleRemoveAmenityFromRoom" styleClass="danger-btn"/>
+                    </HBox>
+                    <TableView fx:id="roomsTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="roomNumCol" text="Room #" prefWidth="80"/>
+                            <TableColumn fx:id="roomTypeCol" text="Type" prefWidth="100"/>
+                            <TableColumn fx:id="roomPriceCol" text="Price/Night" prefWidth="110"/>
+                            <TableColumn fx:id="roomAvailCol" text="Status" prefWidth="100"/>
+                            <TableColumn fx:id="roomAmenCol" text="Amenities" prefWidth="260"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- ROOM TYPES -->
+            <Tab text="🏷  Room Types">
+                <VBox spacing="14" styleClass="tab-body">
+                    
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <TextField fx:id="rtNameField" promptText="Type name" prefWidth="120" styleClass="input-field"/>
+                        <TextField fx:id="rtPriceField" promptText="Price/night" prefWidth="110" styleClass="input-field"/>
+                        <TextField fx:id="rtCapField" promptText="Capacity" prefWidth="90" styleClass="input-field"/>
+                        <Button text="+ Add" onAction="#handleAddRoomType" styleClass="primary-btn"/>
+                        <Button text="✎ Update Selected" onAction="#handleUpdateRoomType" styleClass="secondary-btn"/>
+                        <Button text="✕ Remove" onAction="#handleRemoveRoomType" styleClass="danger-btn"/>
+                        <Label fx:id="rtStatusLabel" styleClass="status-label"/>
+                    </HBox>
+                    <TableView fx:id="roomTypeTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="rtNameCol" text="Name" prefWidth="200"/>
+                            <TableColumn fx:id="rtPriceCol" text="Price/Night (EGP)" prefWidth="180"/>
+                            <TableColumn fx:id="rtCapCol" text="Capacity" prefWidth="140"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- AMENITIES -->
+            <Tab text="✨  Amenities">
+                <VBox spacing="14" styleClass="tab-body">
+                    
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <TextField fx:id="amenNameField" promptText="Amenity name" prefWidth="200" styleClass="input-field"/>
+                        <Button text="+ Add" onAction="#handleAddAmenity" styleClass="primary-btn"/>
+                        <Button text="✎ Update Selected" onAction="#handleUpdateAmenity" styleClass="secondary-btn"/>
+                        <Button text="✕ Remove" onAction="#handleRemoveAmenity" styleClass="danger-btn"/>
+                        <Label fx:id="amenStatusLabel" styleClass="status-label"/>
+                    </HBox>
+                    <TableView fx:id="amenityTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="amenNameCol" text="Amenity Name" prefWidth="300"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- GUESTS -->
+            <Tab text="👥  Guests">
+                <VBox spacing="14" styleClass="tab-body">
+                    
+                    <Label text="All Registered Guests" styleClass="section-title" alignment="CENTER" maxWidth="Infinity"/>
+                    <TableView fx:id="guestsTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="guestUserCol" text="Username" prefWidth="160"/>
+                            <TableColumn fx:id="guestDobCol" text="Date of Birth" prefWidth="140"/>
+                            <TableColumn fx:id="guestGenderCol" text="Gender" prefWidth="100"/>
+                            <TableColumn fx:id="guestAddressCol" text="Address" prefWidth="280"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- RESERVATIONS -->
+            <Tab text="📋  Reservations">
+                <VBox spacing="14" styleClass="tab-body">
+                    
+                    <Label text="All Reservations" styleClass="section-title centered-text"/>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="✓ Confirm Selected" onAction="#handleConfirmReservation" styleClass="primary-btn"/>
+                        <Button text="✕ Cancel Selected" onAction="#handleCancelReservation" styleClass="danger-btn"/>
+                        <Label fx:id="resStatusLabel" styleClass="status-label"/>
+                    </HBox>
+                    <TableView fx:id="reservationsTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="resIdCol" text="Res #" prefWidth="70"/>
+                            <TableColumn fx:id="resGuestCol" text="Guest" prefWidth="120"/>
+                            <TableColumn fx:id="resRoomCol" text="Room" prefWidth="70"/>
+                            <TableColumn fx:id="resInCol" text="Check-in" prefWidth="120"/>
+                            <TableColumn fx:id="resOutCol" text="Check-out" prefWidth="120"/>
+                            <TableColumn fx:id="resStatusCol" text="Status" prefWidth="110"/>
+                            <TableColumn fx:id="resTotalCol" text="Total (EGP)" prefWidth="110"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- CHAT -->
+            <Tab text="💬  Chat Monitor">
+                <VBox spacing="12" styleClass="tab-body">
+                    
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <Label text="Live Chat Monitor" styleClass="section-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Connect" onAction="#handleConnectChat" styleClass="secondary-btn"/>
+                        <Label fx:id="chatStatusLabel" styleClass="status-label"/>
+                    </HBox>
+                    <TextArea fx:id="chatArea" VBox.vgrow="ALWAYS" editable="false" wrapText="true"
+                              styleClass="chat-area" promptText="All chat messages appear here..."/>
+                    <HBox spacing="10">
+                        <TextField fx:id="chatInput" HBox.hgrow="ALWAYS" styleClass="input-field" promptText="Send a message to guests..."/>
+                        <Button text="Send →" onAction="#handleSendChat" styleClass="primary-btn"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

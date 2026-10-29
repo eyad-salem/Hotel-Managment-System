@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="LoginController"           
+           styleClass="root-pane"
+           prefWidth="900" prefHeight="600">
+
+    <VBox alignment="CENTER" spacing="0" maxWidth="460" maxHeight="580" styleClass="login-card">
+
+        <!-- Header -->
+        <VBox alignment="CENTER" spacing="6" styleClass="login-header">
+            <Label text="🏨" styleClass="hotel-icon"/>
+            <Label text="7amada Hotel" styleClass="hotel-title"/>
+            <Label text="Reservation System" styleClass="hotel-subtitle"/>
+        </VBox>
+
+        <TabPane fx:id="tabPane" styleClass="login-tabs" tabClosingPolicy="UNAVAILABLE">
+
+            <!-- LOGIN TAB -->
+            <Tab text="Sign In">
+                <VBox spacing="18" styleClass="tab-content" style="-fx-padding: 30 40 30 40;">
+
+                    <HBox spacing="16" alignment="CENTER">
+                        <Label text="I am a:" styleClass="field-label"/>
+                        <RadioButton fx:id="guestRadio" text="Guest" styleClass="radio-btn" selected="true">
+                            <toggleGroup><ToggleGroup fx:id="userTypeGroup"/></toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="staffRadio" text="Staff" styleClass="radio-btn" toggleGroup="$userTypeGroup"/>
+                    </HBox>
+
+                    <VBox spacing="6">
+                        <Label text="Username" styleClass="field-label"/>
+                        <TextField fx:id="loginUsernameField" promptText="Enter your username" styleClass="input-field"/>
+                    </VBox>
+
+                    <VBox spacing="6">
+                        <Label text="Password" styleClass="field-label"/>
+                        <PasswordField fx:id="loginPasswordField" promptText="Enter your password" styleClass="input-field"/>
+                    </VBox>
+
+                    <Label fx:id="loginErrorLabel" text="" styleClass="error-label" wrapText="true"/>
+
+                    <Button text="Sign In →" onAction="#handleLogin" styleClass="primary-btn" maxWidth="Infinity"/>
+                </VBox>
+            </Tab>
+
+            <!-- REGISTER TAB -->
+            <Tab text="Register">
+                <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+                    <VBox spacing="14" styleClass="tab-content" style="-fx-padding: 24 40 24 40;">
+
+                        <VBox spacing="5">
+                            <Label text="Username" styleClass="field-label"/>
+                            <TextField fx:id="regUsernameField" promptText="Choose a username" styleClass="input-field"/>
+                        </VBox>
+                        <VBox spacing="5">
+                            <Label text="Password" styleClass="field-label"/>
+                            <PasswordField fx:id="regPasswordField" promptText="Min 4 characters" styleClass="input-field"/>
+                        </VBox>
+                        <VBox spacing="5">
+                            <Label text="Confirm Password" styleClass="field-label"/>
+                            <PasswordField fx:id="regConfirmPasswordField" promptText="Repeat password" styleClass="input-field"/>
+                        </VBox>
+                        <VBox spacing="5">
+                            <Label text="Date of Birth" styleClass="field-label"/>
+                            <DatePicker fx:id="regDobPicker" styleClass="input-field" maxWidth="Infinity"/>
+                        </VBox>
+                        <VBox spacing="5">
+                            <Label text="Address" styleClass="field-label"/>
+                            <TextField fx:id="regAddressField" promptText="Your address" styleClass="input-field"/>
+                        </VBox>
+                        <VBox spacing="5">
+                            <Label text="Gender" styleClass="field-label"/>
+                            <ComboBox fx:id="regGenderCombo" maxWidth="Infinity" styleClass="combo-field"/>
+                        </VBox>
+
+                        <Label fx:id="regErrorLabel" text="" styleClass="error-label" wrapText="true"/>
+                        <Label fx:id="regSuccessLabel" text="" styleClass="success-label" wrapText="true"/>
+
+                        <Button text="Create Account" onAction="#handleRegister" styleClass="primary-btn" maxWidth="Infinity"/>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+        </TabPane>
+    </VBox>
+</StackPane>
