@@ -1,8 +1,8 @@
-Hotel Management & Reservation System
+## Hotel Management & Reservation System
 
 A comprehensive Java and JavaFX-based desktop application designed to streamline hotel operations, featuring role-based access control, room and guest management, billing, and real-time communication tools.
 
-Features
+## Features
 
 - Role-Based Dashboards: Distinct user interfaces and permissions for Administrators, Receptionists, and Guests.
 - Room & Amenity Management: Add, check, and update room statuses, types, and amenities.
@@ -10,14 +10,14 @@ Features
 - Built-in Chat System: Client-server chat functionality for internal communication.
 - SQLite Database Integration: Persistent local data storage managed via a lightweight relational database (hotel.db).
 
-Tech Stack
+## Tech Stack
 
 - Language: Java
 - UI Framework: JavaFX (FXML for layout views)
 - Database: SQLite (hotel_data/hotel.db)
 - Environment: IDE of choice (IntelliJ IDEA, Eclipse, or VS Code) with JavaFX SDK configured.
 
-Setup and Testing Instructions
+## Setup and Testing Instructions
 
 Follow these steps to set up and run the project locally on your machine:
 
